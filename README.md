@@ -1,4 +1,4 @@
-##UgandaLegalAI
+**UGANDA LEGAL AI**
 
 UgandaLegalAI is a modern Retrieval-Augmented Generation (RAG 3.0) system built to improve access to Ugandan law.
 
