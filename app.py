@@ -63,7 +63,7 @@ st.markdown("""
 <div class="full-width-header">
     <div class="header-title">⚖️ UGANDA LEGAL AWARENESS AI</div>
     <div class="header-sub">
-        Grounded Legal Intelligence • RAG 3.0 • Powered by McGee
+        Grounded Legal Intelligence
     </div>
 </div>
 """, unsafe_allow_html=True)
