@@ -89,9 +89,10 @@ textarea {
 # -----------------------------------
 # HEADER
 # -----------------------------------
+
 st.markdown("""
 <div class="header-container">
-    <div class="header-title">⚖️ Uganda Legal Awareness AI</div>
+    <div class="header-title">⚖️ UGANDA LEGAL AWARENESS AI</div>
     <div class="header-sub">
         AI-powered access to Ugandan law • RAG 3.0 • Grounded in Official Acts
     </div>
