@@ -27,15 +27,17 @@ html, body, [class*="css"]  {
     background-color: #F4F6F9;
 }
 
-/* FULL WIDTH HEADER */
-.main-header {
-    position: relative;
-    left: -3rem;
-    width: calc(100% + 6rem);
+/* Remove top padding from Streamlit container */
+.block-container {
+    padding-top: 0rem;
+}
+
+/* Full-width header */
+.full-width-header {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
     background: linear-gradient(90deg, #0B0F19 0%, #1A1F2E 100%);
-    padding: 1.8rem 3rem;
-    margin-top: -2rem;
-    margin-bottom: 2rem;
+    padding: 2rem 2rem;
     border-bottom: 4px solid #FFCD00;
 }
 
@@ -49,46 +51,6 @@ html, body, [class*="css"]  {
     color: #FFCD00;
     font-size: 0.95rem;
     margin-top: 0.4rem;
-    letter-spacing: 0.5px;
-}
-
-/* Chat width */
-.block-container {
-    max-width: 850px;
-    padding-top: 0rem;
-}
-
-/* USER MESSAGE */
-[data-testid="stChatMessage-user"] {
-    background: linear-gradient(135deg, #0B0F19, #1A1F2E);
-    color: white;
-    border-radius: 16px;
-    padding: 1rem;
-    border-left: 5px solid #FFCD00;
-    box-shadow: 0px 4px 14px rgba(0,0,0,0.08);
-}
-
-/* ASSISTANT MESSAGE */
-[data-testid="stChatMessage-assistant"] {
-    background: white;
-    color: #111827;
-    border-radius: 16px;
-    padding: 1rem;
-    border-left: 5px solid #D00000;
-    box-shadow: 0px 6px 18px rgba(0,0,0,0.06);
-}
-
-/* Input field */
-textarea {
-    border-radius: 14px !important;
-}
-
-/* Footer */
-.footer {
-    text-align: center;
-    font-size: 0.8rem;
-    margin-top: 3rem;
-    opacity: 0.6;
 }
 
 </style>
@@ -98,7 +60,7 @@ textarea {
 # HEADER
 # -----------------------------------
 st.markdown("""
-<div class="main-header">
+<div class="full-width-header">
     <div class="header-title">⚖️ UGANDA LEGAL AWARENESS AI</div>
     <div class="header-sub">
         Grounded Legal Intelligence • RAG 3.0 • Powered by Groq
