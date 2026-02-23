@@ -63,7 +63,7 @@ st.markdown("""
 <div class="full-width-header">
     <div class="header-title">⚖️ UGANDA LEGAL AWARENESS AI</div>
     <div class="header-sub">
-        Grounded Legal Intelligence • RAG 3.0 • Powered by Groq
+        Grounded Legal Intelligence • RAG 3.0 • Powered by McGee
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -180,6 +180,6 @@ if prompt := st.chat_input("Ask a question about Ugandan law..."):
 # -----------------------------------
 st.markdown("""
 <div class="footer">
-    UgandaLegalAI • Legal Access Platform • Brian Miami
+    UgandaLegalAI • Legal Access Platform • By McGee
 </div>
 """, unsafe_allow_html=True)
