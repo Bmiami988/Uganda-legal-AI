@@ -15,7 +15,7 @@ st.set_page_config(
 )
 
 # -----------------------------------
-# MODERN UGANDAN THEME UI
+# MODERN UGANDAN CIVIC UI
 # -----------------------------------
 st.markdown("""
 <style>
@@ -24,61 +24,69 @@ st.markdown("""
 
 html, body, [class*="css"]  {
     font-family: 'Inter', sans-serif;
-    background-color: #F8FAFC;
+    background-color: #F4F6F9;
 }
 
-/* Header */
-.header-container {
-    background: linear-gradient(90deg, #0F172A 0%, #1E293B 100%);
-    padding: 1.2rem 2rem;
-    border-radius: 14px;
-    color: white;
-    margin-bottom: 1.5rem;
+/* FULL WIDTH HEADER */
+.main-header {
+    position: relative;
+    left: -3rem;
+    width: calc(100% + 6rem);
+    background: linear-gradient(90deg, #0B0F19 0%, #1A1F2E 100%);
+    padding: 1.8rem 3rem;
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+    border-bottom: 4px solid #FFCD00;
 }
 
 .header-title {
-    font-size: 1.8rem;
+    color: white;
+    font-size: 2rem;
     font-weight: 700;
 }
 
 .header-sub {
+    color: #FFCD00;
     font-size: 0.95rem;
-    opacity: 0.8;
+    margin-top: 0.4rem;
+    letter-spacing: 0.5px;
 }
 
-/* Chat container width */
+/* Chat width */
 .block-container {
-    max-width: 900px;
-    padding-top: 1rem;
+    max-width: 850px;
+    padding-top: 0rem;
 }
 
-/* Chat bubbles */
+/* USER MESSAGE */
 [data-testid="stChatMessage-user"] {
-    background: linear-gradient(135deg, #0F172A, #1E293B);
+    background: linear-gradient(135deg, #0B0F19, #1A1F2E);
     color: white;
-    border-radius: 18px;
+    border-radius: 16px;
     padding: 1rem;
-    border-left: 4px solid #FACC15;
+    border-left: 5px solid #FFCD00;
+    box-shadow: 0px 4px 14px rgba(0,0,0,0.08);
 }
 
+/* ASSISTANT MESSAGE */
 [data-testid="stChatMessage-assistant"] {
     background: white;
     color: #111827;
-    border-radius: 18px;
+    border-radius: 16px;
     padding: 1rem;
-    border-left: 4px solid #B91C1C;
-    box-shadow: 0px 4px 18px rgba(0,0,0,0.05);
+    border-left: 5px solid #D00000;
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.06);
 }
 
-/* Input box styling */
+/* Input field */
 textarea {
-    border-radius: 12px !important;
+    border-radius: 14px !important;
 }
 
 /* Footer */
 .footer {
     text-align: center;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     margin-top: 3rem;
     opacity: 0.6;
 }
@@ -89,12 +97,11 @@ textarea {
 # -----------------------------------
 # HEADER
 # -----------------------------------
-
 st.markdown("""
-<div class="header-container">
+<div class="main-header">
     <div class="header-title">⚖️ UGANDA LEGAL AWARENESS AI</div>
     <div class="header-sub">
-        AI-powered access to Ugandan law • RAG 3.0 • Grounded in Official Acts
+        Grounded Legal Intelligence • RAG 3.0 • Powered by Groq
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -115,7 +122,6 @@ def load_system():
     return index, chunks, embedder, reranker
 
 index, all_chunks, embedding_model, reranker = load_system()
-
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 
 # -----------------------------------
@@ -142,14 +148,14 @@ def generate_answer(query, context_chunks):
     
     prompt = f"""
 You are a Ugandan legal awareness assistant.
-Provide a structured, clear and detailed answer.
+Provide a structured, clear, and detailed answer.
 Use ONLY the provided context.
-If the answer is not found, state clearly that it is not available in the provided Acts.
+If not found, clearly state that the answer is not available in the provided Acts.
 
-Where possible:
-- Reference relevant sections
-- Use bullet points for clarity
-- Avoid speculation
+Use:
+- Headings where helpful
+- Bullet points for clarity
+- Section references when available
 
 Context:
 {context_text}
@@ -175,7 +181,6 @@ Answer:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display previous messages
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
@@ -192,20 +197,27 @@ if prompt := st.chat_input("Ask a question about Ugandan law..."):
     
     with st.chat_message("assistant"):
         with st.spinner("Analyzing legislation and generating response..."):
-            
             retrieved = retrieve(prompt)
             reranked = rerank(prompt, retrieved)
             answer = generate_answer(prompt, reranked)
-            
             st.markdown(answer)
-    
+
     st.session_state.messages.append({"role": "assistant", "content": answer})
+
+    # AUTO SCROLL SCRIPT
+    st.markdown("""
+        <script>
+            const streamlitDoc = window.parent.document;
+            const main = streamlitDoc.querySelector('section.main');
+            main.scrollTo({ top: main.scrollHeight, behavior: 'smooth' });
+        </script>
+    """, unsafe_allow_html=True)
 
 # -----------------------------------
 # FOOTER
 # -----------------------------------
 st.markdown("""
 <div class="footer">
-    UgandaLegalAI • Built with FAISS, SentenceTransformers & Groq • Community Legal Awareness
+    UgandaLegalAI • Legal Access Platform • Brian Miami
 </div>
 """, unsafe_allow_html=True)
